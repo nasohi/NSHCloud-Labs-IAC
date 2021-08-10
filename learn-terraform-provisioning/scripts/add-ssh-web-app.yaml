@@ -1,0 +1,33 @@
+#cloud-config
+# Add groups to the system
+# Adds the ubuntu group with members 'root' and 'sys'
+# and the empty group hashicorp.
+groups:
+  - ubuntu: [root,sys]
+  - nshcloudlabs
+
+# Add users to the system. Users are added after groups are added.
+users:
+  - default
+  - name: nasohi
+    gecos: nasohi
+    shell: /bin/bash
+    primary_group: nshcloudlabs
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: users, admin
+    lock_passwd: false
+    ssh_authorized_keys:
+      - # Paste your created SSH key here
+
+# Downloads the golang package
+packages:
+  - golang-go
+  - htop
+
+# Sets the GOPATH & downloads the demo payload
+runcmd:
+  - sudo su terraform
+  - sudo mkdir -p /opt/nshcloudlabs/go
+  - sudo chown nasohi:nshcloudlabs /opt/nshcloudlabs/go
+  - export GOPATH=/opt/nshcloudlabs/go
+  - go get github.com/hashicorp/learn-go-webapp-demo
