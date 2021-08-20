@@ -13,6 +13,12 @@ resource "aws_subnet" "subnet_public" {
   cidr_block = var.cidr_subnet
 }
 
+resource "aws_subnet" "subnet_public2" {
+  vpc_id     = aws_vpc.vpc.id
+  cidr_block = var.cidr_subnet2
+  availability_zone = "ap-northeast-1d"
+}
+
 resource "aws_route_table" "rtb_public" {
   vpc_id = aws_vpc.vpc.id
 
@@ -27,14 +33,14 @@ resource "aws_route_table_association" "rta_subnet_public" {
   route_table_id = aws_route_table.rtb_public.id
 }
 
-resource "aws_security_group" "sg_22_80" {
-  name   = "sg_22"
+resource "aws_security_group" "nshcloudlabs-public-security" {
+  name   = "nshcloudlabs-public-security"
   vpc_id = aws_vpc.vpc.id
 
   # SSH access from the VPC
   ingress {
-    from_port   = 22
-    to_port     = 22
+    from_port   = 2022
+    to_port     = 2022
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -45,15 +51,7 @@ resource "aws_security_group" "sg_22_80" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
-
-  ingress {
-    from_port   = 8080
-    to_port     = 8080
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
+  
   egress {
     from_port   = 0
     to_port     = 0
