@@ -13,11 +13,11 @@ resource "aws_subnet" "subnet_public" {
   cidr_block = var.cidr_subnet
 }
 
-resource "aws_subnet" "subnet_public2" {
-  vpc_id     = aws_vpc.vpc.id
-  cidr_block = var.cidr_subnet2
-  availability_zone = "ap-northeast-1d"
-}
+#resource "aws_subnet" "subnet_public2" {
+#  vpc_id     = aws_vpc.vpc.id
+#  cidr_block = var.cidr_subnet2
+#  availability_zone = "ap-northeast-1d"
+#}
 
 resource "aws_route_table" "rtb_public" {
   vpc_id = aws_vpc.vpc.id
