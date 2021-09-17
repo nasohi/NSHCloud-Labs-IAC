@@ -39,8 +39,8 @@ resource "aws_security_group" "nshcloudlabs-public-security" {
 
   # SSH access from the VPC
   ingress {
-    from_port   = 2022
-    to_port     = 2022
+    from_port   = 20212
+    to_port     = 20212
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }

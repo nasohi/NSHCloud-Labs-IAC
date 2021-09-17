@@ -23,10 +23,15 @@ users:
 packages:
   - golang-go
   - htop
+  - net-tools
 
 # Sets the GOPATH & downloads the demo payload
 runcmd:
-  - sudo su terraform
+  - sudo sed -i -e '/^#Port/s/^.*$/Port 20212/' /etc/ssh/sshd_config
+  - sudo sed -i -e '/^#PermitRootLogin/s/^.*$/PermitRootLogin no/' /etc/ssh/sshd_config
+  - sudo sed -i -e '$aAllowUsers nasohi' /etc/ssh/sshd_config
+  - sudo service ssh restart
+  - sudo su nasohi
   - sudo mkdir -p /opt/nshcloudlabs/go
   - sudo chown nasohi:nshcloudlabs /opt/nshcloudlabs/go
   - export GOPATH=/opt/nshcloudlabs/go
