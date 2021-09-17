@@ -45,6 +45,14 @@ resource "aws_security_group" "nshcloudlabs-public-security" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  # Juice-shop OWASP learning
+  ingress {
+    from_port   = 3000
+    to_port     = 3000
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   ingress {
     from_port   = 80
     to_port     = 80
