@@ -1,0 +1,25 @@
+---
+- hosts: "nshcloudlabs-webapp1"
+  become: true
+  vars_files:
+    - vars/default.yml
+  tasks:
+    - name: Set up SSL virtuahHost
+      template:
+        src: "files/apache2-ssl.conf.j2"
+        dest: "/etc/apache2/sites-available/{{ http_conf }}"
+      notify: restart apache2
+
+    - name: enable Apache SSL module
+      command: a2enmod ssl
+      notify: restart apache2
+    
+    - name: a2ensite {{ http_conf }}
+      command: a2ensite {{ http_conf }}
+      notify: restart apache2
+
+  handlers:
+    - name: restart apache2
+      service:
+        name: apache2
+        state: restarted
