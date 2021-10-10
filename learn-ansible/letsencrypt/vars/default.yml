@@ -1,0 +1,4 @@
+http_host: "nshcloudlabs.com"
+http_conf: "nshcloudlabs-ssl.conf"
+http_port: "443"
+http_directory: "wordpress"
