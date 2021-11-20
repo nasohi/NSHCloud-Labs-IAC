@@ -1,5 +1,5 @@
 ---
-- hosts: "nshcloudlabs-webapp1"
+- hosts: all
   become: yes
   vars:
     acme_challenge_type: http-01

@@ -1,5 +1,5 @@
 ---
-- hosts: "nshcloudlabs-webapp1"
+- hosts: all
   become: true
   vars_files:
     - vars/default.yml
