@@ -1,5 +1,5 @@
 [servers]
-nshcloudlabs-webapp1 ansible_host=54.254.236.190 ansible_port=20212
+nshcloudlabs-webapp2 ansible_host=www.nshcloudlabs.com ansible_port=20212
 
 [servers:vars]
 ansible_python_interpreter=/usr/bin/python3
