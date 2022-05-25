@@ -4,7 +4,7 @@ provider "google" {
  zone    = "asia-southeast2-a"
 }
 
-
+#Compute configuration
 #https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_instance
 resource "google_compute_instance" "nshcloudlabs-wwww" {
  name         = "nshcloudlabs-www"
@@ -25,11 +25,13 @@ resource "google_compute_instance" "nshcloudlabs-wwww" {
  }
 }
 
+#Network configuration
 resource "google_compute_network" "vpc_network" {
   name                    = "nshcloudlabs-network"
   auto_create_subnetworks = true
 }
 
+#Firewall configuration
 resource "google_compute_firewall" "allow_ssh" {
   name          = "allow-ssh"
   network       = google_compute_network.vpc_network.name
@@ -46,4 +48,3 @@ resource "google_compute_firewall" "allow_ssh" {
 #output "public_ip" {
 #  value = google_compute_address.static_ip.address
 #}
-
